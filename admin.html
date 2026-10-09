@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f477a5">
+  <title>Administration — Mariam Barham</title>
+  <link rel="icon" href="assets/logo-mariam-barham.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <a href="index.html" class="admin-brand"><img src="assets/logo-mariam-barham.png" alt="Logo Mariam Barham"><span><strong>MARIAM BARHAM</strong><small>Administration de la boutique</small></span></a>
+    <a href="index.html" class="secondary-button">← Voir la boutique</a>
+  </header>
+  <main class="admin-main">
+    <div class="admin-intro"><div><span class="admin-eyebrow">Espace de gestion</span><h1>Gérer le catalogue</h1><p>Ajoutez vos produits, ajustez les prix et préparez les informations avant publication.</p></div><div class="admin-stat"><strong id="product-total">0</strong><span>produits</span></div></div>
+    <div class="admin-warning"><strong>À savoir :</strong> cette version enregistre les modifications dans le navigateur utilisé, pas sur un serveur partagé. L'accès n'est pas protégé par un compte. Avant la mise en ligne publique, il faudra connecter une base de données et une authentification sécurisée pour que les changements soient visibles par tous.</div>
+    <section class="admin-panel">
+      <div class="panel-heading"><div><h2 id="form-title">Ajouter un produit</h2><p>Les prix sont saisis en FCFA. Les photos peuvent être ajoutées après réception du catalogue.</p></div></div>
+      <form id="product-form" class="admin-form">
+        <input type="hidden" id="product-id">
+        <label>Nom du produit<input id="product-name" required maxlength="100" placeholder="Ex. Huile parfumée"></label>
+        <label>Catégorie<select id="product-category" required><option value="parfums">Parfums & huiles</option><option value="soins">Beauté & soins</option><option value="sacs">Sacs & chaussures</option><option value="mode">Robes & mode</option><option value="maison">Maison & linge</option><option value="accessoires">Accessoires</option></select></label>
+        <label>Prix (FCFA)<input id="product-price" type="number" min="0" step="1" required placeholder="8500"></label>
+        <label>Badge / collection<input id="product-badge" maxlength="40" placeholder="Parfumerie"></label>
+        <label>Emoji provisoire<input id="product-emoji" maxlength="8" placeholder="🌸" value="✨"></label>
+        <label class="wide-field">Description<textarea id="product-description" rows="3" maxlength="300" placeholder="Description du produit"></textarea></label>
+        <div class="form-actions wide-field"><button class="primary-button" type="submit" id="save-product">Enregistrer le produit</button><button class="secondary-button hidden" type="button" id="cancel-edit">Annuler la modification</button></div>
+      </form>
+    </section>
+    <section class="admin-panel">
+      <div class="panel-heading inventory-heading"><div><h2>Catalogue actuel</h2><p>Les changements sont utilisés par la boutique sur ce même navigateur.</p></div><input id="admin-search" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher un produit"></div>
+      <div id="admin-products" class="admin-products"></div>
+      <p id="empty-state" class="empty-state hidden">Aucun produit ne correspond à votre recherche.</p>
+    </section>
+    <section class="admin-panel backup-panel"><div><h2>Sauvegarde du catalogue</h2><p>Exportez un fichier JSON pour conserver vos produits ou réimportez une sauvegarde.</p></div><div class="backup-actions"><button type="button" id="export-catalog" class="secondary-button">↓ Exporter JSON</button><label class="secondary-button import-button">↑ Importer JSON<input id="import-catalog" type="file" accept="application/json,.json" hidden></label><button type="button" id="reset-catalog" class="danger-button">Réinitialiser les exemples</button></div></section>
+    <p class="admin-footer-note">Conseil : vérifiez les prix, les stocks et les descriptions avant de remplacer les produits de démonstration.</p>
+  </main>
+  <div id="admin-toast" role="status" aria-live="polite" class="admin-toast"></div>
+  <script src="js/admin.js"></script>
+</body>
+</html>
